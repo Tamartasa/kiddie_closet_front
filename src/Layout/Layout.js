@@ -1,16 +1,23 @@
-import PrimarySearchAppBar from "../HomePage/HomePage"
-import { Outlet, NavLink, useLocation } from "react-router-dom"
+import KiddieAppBar from "../components/AppBar/AppBar";
+import { Outlet, useLocation } from "react-router-dom";
+import UserContext from "../Contexts/UserContext";
+import { useContext, useEffect } from "react";
 
 export default function Layout() {
+  const currLocation = useLocation();
+  const { loggedUser } = useContext(UserContext);
 
-    const currLocation = useLocation()
-    console.log('Layout:', currLocation)
+  useEffect(() => {
+    console.log("Layout loggedUser changed:", loggedUser);
+  }, [loggedUser]);
 
-    return (
-        <> 
-        <PrimarySearchAppBar/>
-        <Outlet />
-        </>
-       
-    )
+  console.log("Layout:", currLocation);
+  console.log(loggedUser);
+
+  return (
+    <>
+      <KiddieAppBar loggedUser={loggedUser} />
+      <Outlet />
+    </>
+  );
 }

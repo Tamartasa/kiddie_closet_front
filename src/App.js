@@ -1,32 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
-import PrimarySearchAppBar from './HomePage/HomePage';
-import TitlebarImageList from './Items/Items';
-import ItemCard from './ItemCard/ItemCard';
-import Ad from './Ad/Ad';
-import SignUp from './Login/Login';
-import Layout from './Layout/Layout';
-import { Route, Routes } from 'react-router-dom';
-
+import "./App.css";
+import Ad from "./Ad/Ad";
+import SignUp from "./SignUp/SignUp";
+import Layout from "./Layout/Layout";
+import { Route, Routes } from "react-router-dom";
+import UserContext from "./Contexts/UserContext";
+import { useState } from "react";
+import LoginPage from "./components/LoginPage/LoginPage";
 
 function App() {
-  return (
+  const [loggedUser, setLoggedUser] = useState(null);
 
-    <Routes>
-    <Route path='/' element={<Layout/>}>
-      <Route index element={<Ad/>}/>
-      <Route path="signup" element={<SignUp/>}/>
-    </Route>
-  </Routes>
- );
+  return (
+    <UserContext.Provider value={{ loggedUser, setLoggedUser }}>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Ad />} />
+          <Route path="signup" element={<SignUp />} />
+          <Route path="login" element={<LoginPage />} />
+        </Route>
+      </Routes>
+    </UserContext.Provider>
+  );
 }
 
-    // <>
-    // <PrimarySearchAppBar/>
-    // <Ad/>
-    // <SignUp/>
-    // {/* <TitlebarImageList/> */}
-    // </>
-   
- 
 export default App;

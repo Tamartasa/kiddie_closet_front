@@ -1,0 +1,3 @@
+const menuItems = [{ name: "home", iconType: "home" }];
+
+//in jsx - menuItems.map(menuItem)...
