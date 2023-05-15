@@ -85,6 +85,10 @@ export default function KiddieAppBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleHomePageOpen = () => {
+    navigate("/");
+  };
+
   const navigate = useNavigate();
 
   const handleSignUp = (event) => {
@@ -187,14 +191,17 @@ export default function KiddieAppBar() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
-          >
-            KIDDIE CLOSET
-          </Typography>
+          <IconButton onClick={handleHomePageOpen}>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ display: { xs: "none", sm: "block" } }}
+            >
+              KIDDIE CLOSET
+            </Typography>
+          </IconButton>
+
           <Search>
             <SearchIconWrapper>
               <SearchIcon />

@@ -6,4 +6,11 @@ export const USER_DATA = `${HOSTNAME}/users/data`;
 export const LOGIN = `${HOSTNAME}/users/token/`;
 export const REFRESH = `${HOSTNAME}/users/token/refresh/`;
 
-export const ADD_ITEM = `${HOSTNAME}/items/`;
+export const CATEGORIES_URL = `${HOSTNAME}/categories/`;
+export const GET_ADD_ITEM = `${HOSTNAME}/items/`;
+export const GET_ITEMS_BY_AD_ID = `${HOSTNAME}/items?ad_id=`;
+
+export const GET_ITEMS_BY_CATEGORY_URL = `${HOSTNAME}/items?category=`;
+
+export const staticItemImage =
+  "https://img.freepik.com/premium-vector/clothes-items-white-background-seamless-pattern-thin-line_48369-13298.jpg?w=2000";

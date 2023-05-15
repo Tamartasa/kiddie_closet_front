@@ -4,9 +4,10 @@ import * as React from "react";
 import { Box, TextField, MenuItem, Button, Typography } from "@mui/material";
 // import { PhoneNumberInput } from '@material-ui/lab';
 import MuiPhoneNumber from "material-ui-phone-number";
-import UserContext from "../Contexts/UserContext";
+import UserContext from "../../Contexts/UserContext";
 import { makeStyles } from "@material-ui/core/styles";
-import { SIGNUP } from "../urls";
+import { SIGNUP } from "../../urls";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     minHeight: "100vh",
-    border: `1px solid`,
   },
   form: {
     display: "flex",
@@ -38,7 +38,7 @@ export default function SignUp() {
   const classes = useStyles();
   const [errorText, setErrorText] = useState("");
   const [formSubmitted, setFormSubmitted] = useState(false);
-
+  const navigate = useNavigate();
   const [userData, setUserData] = useState("");
   const [neighborhoods, setNeighborhoods] = useState([]);
   const { loggedUser, setLoggedUser } = useContext(UserContext);
@@ -113,6 +113,7 @@ export default function SignUp() {
       console.log(
         `result data: ${result.data}, result status: ${result.status}`
       );
+      navigate("/login");
     } catch (error) {
       console.log(`Error in ${handleSubmit.name}: ${error}`);
       console.log(error.response.data);
@@ -129,13 +130,18 @@ export default function SignUp() {
   };
 
   return (
-    <Box className={classes.root}>
+    <Box
+      className={classes.root}
+      sx={{ marginTop: { xs: "15px", md: "30px" } }}
+    >
       <Box
         className={classes.form}
         sx={{
           "& .MuiTextField-root": { m: 1, width: "25ch", textAlign: "center" },
+          padding: "10px 40px",
         }}
       >
+        {/* <div> */}
         <TextField
           required
           id="outlined-required"
@@ -271,9 +277,12 @@ export default function SignUp() {
         >
           <MenuItem value="Tel Aviv">Tel Aviv</MenuItem>
         </TextField>
+        {/* </div> */}
 
         <Button
-          variant="outlined"
+          variant="contained"
+          type="submit"
+          style={{ backgroundColor: "#e4c4a1" }}
           sx={{ height: "40px", width: "120px" }}
           onClick={handleSubmit}
         >
