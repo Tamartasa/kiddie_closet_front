@@ -12,5 +12,7 @@ export const GET_ITEMS_BY_AD_ID = `${HOSTNAME}/items?ad_id=`;
 
 export const GET_ITEMS_BY_CATEGORY_URL = `${HOSTNAME}/items?category=`;
 
+export const GOOGLE_LOGIN = `${HOSTNAME}/users/token/google/`;
+
 export const staticItemImage =
   "https://img.freepik.com/premium-vector/clothes-items-white-background-seamless-pattern-thin-line_48369-13298.jpg?w=2000";

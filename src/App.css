@@ -36,14 +36,16 @@
     transform: rotate(360deg);
   }
 }
-
 body {
   position: relative;
+  background-image: url("https://thewallberry.com/wp-content/uploads/2021/04/beige_terrazzo.jpg");
+  background-size: cover;
 }
 
 body::before {
   content: "";
   background-image: url("https://thewallberry.com/wp-content/uploads/2021/04/beige_terrazzo.jpg");
+  background-size: cover;
   opacity: 0.8;
   top: 0;
   left: 0;

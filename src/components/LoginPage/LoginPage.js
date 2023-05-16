@@ -73,7 +73,8 @@ import { TextField, Button, Typography, Box } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import UserContext from "../../Contexts/UserContext";
-import { LOGIN } from "../../urls";
+import { GOOGLE_LOGIN, LOGIN } from "../../urls";
+import { GoogleLogin } from "@react-oauth/google";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -82,7 +83,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     height: "100vh",
-    border: `1px solid`,
   },
   form: {
     display: "flex",
@@ -190,6 +190,20 @@ export default function LoginPage() {
             {errorText}
           </Typography>
         )}
+
+        <GoogleLogin
+          onSuccess={async (credentialResponse) => {
+            console.log(credentialResponse);
+            const response = await axios.post(
+              GOOGLE_LOGIN,
+              {},
+              { headers: { Authorization: credentialResponse.credential } }
+            );
+          }}
+          onError={() => {
+            console.log("Login Failed");
+          }}
+        />
       </Box>
     </Box>
   );

@@ -13,6 +13,7 @@ import {
   CardActionArea,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { HOME_PAGE_IMG } from "../../tests";
 
 export default function HomePage() {
   const [categories, setCategories] = useState([]);
@@ -37,6 +38,11 @@ export default function HomePage() {
   const handleGetAllItems = (event) => {
     event.preventDefault();
     navigate(`/items`);
+  };
+
+  const handleShareItem = (event) => {
+    event.preventDefault();
+    navigate("/shareitem");
   };
 
   const cardStyle = {
@@ -70,7 +76,6 @@ export default function HomePage() {
             component="h1"
             sx={{
               width: 200,
-              fontFamily: "Playfair Display",
               marginBottom: "30px",
             }}
           >
@@ -80,19 +85,29 @@ export default function HomePage() {
             variant="body"
             sx={{
               width: 200,
-              fontFamily: "Playfair Display",
               marginBottom: "30px",
             }}
           >
             encourage the preservation of the environment and community
           </Typography>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleGetAllItems}
-          >
-            Get Now
-          </Button>
+          <div style={{ display: "flex" }}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleGetAllItems}
+              sx={{ marginRight: "10px", borderRadius: "12px" }}
+            >
+              Find
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleShareItem}
+              sx={{ marginRight: "10px", borderRadius: "12px" }}
+            >
+              Share
+            </Button>
+          </div>
         </div>
         <div
           style={{
@@ -103,7 +118,7 @@ export default function HomePage() {
           }}
         >
           <img
-            src="https://birminghamparent.com/directory/wp-content/uploads/2021/12/Clothing-Kids-for-Less-678x381.jpg"
+            src={HOME_PAGE_IMG}
             alt="My Store"
             style={{ width: "100%", height: "90%", maxWidth: "100%" }}
           />

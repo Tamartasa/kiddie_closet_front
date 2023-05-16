@@ -11,7 +11,7 @@ import { makeStyles } from "@material-ui/core";
 import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { GET_ITEMS_BY_CATEGORY_URL } from "../../urls";
+import { CATEGORIES_URL, GET_ITEMS_BY_CATEGORY_URL } from "../../urls";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -36,30 +36,26 @@ export default function ItemsByCategory() {
 
   const [allItems, setAllItems] = useState([]);
   const { category_id } = useParams();
+  const [categoryName, setCategoryName] = useState("");
 
   useEffect(() => {
     console.log("items by category page");
     const fetchItem = async () => {
       try {
+        const categoryResponse = await axios.get(
+          `${CATEGORIES_URL}${category_id}`
+        );
+        console.log(categoryResponse.data);
+        setCategoryName(categoryResponse.data.category_name);
+
         const allItemsREsult = await axios.get(
           `${GET_ITEMS_BY_CATEGORY_URL}${category_id}`
         );
         console.log(allItemsREsult);
         console.log(allItemsREsult.data.results);
         const AllItems = allItemsREsult.data.results;
-        const itemElements = AllItems.map((item) => {
-          return (
-            <div key={item.id}>
-              <p>{item.id}</p>
-              <p>{item.size}</p>
-              <p>{item.condition}</p>
-              <p>{item.gender}</p>
-              <img src={item.image} alt={item.description} />
-            </div>
-          );
-        });
+
         setAllItems(AllItems);
-        // setItemElements(itemElements);
       } catch (error) {
         console.log(`error: ${error}`);
       }
@@ -73,10 +69,10 @@ export default function ItemsByCategory() {
 
   return (
     <Container maxWidth="lg" className={classes.container}>
-      <h1>items from category: {category_id} </h1>
+      <h1>items from category: {categoryName} </h1>
       <Grid container spacing={4}>
         {allItems.map((item) => (
-          <Grid item key={item.id} xs={12} sm={6} md={3}>
+          <Grid item key={item.id} xs={12} sm={3} md={3}>
             <Card className={classes.card}>
               <CardActionArea component={Link} to={`/items/${item.id}`}>
                 <CardMedia

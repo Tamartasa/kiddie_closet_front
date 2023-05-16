@@ -5,18 +5,16 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
-import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../../Contexts/UserContext";
+import CheckroomIcon from "@mui/icons-material/Checkroom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -103,12 +101,17 @@ export default function KiddieAppBar() {
     navigate("/login");
   };
 
+  const handleProfilePage = (event) => {
+    setAnchorEl(null);
+    event.preventDefault();
+    navigate("/me");
+  };
+
   const handleLogout = (event) => {
     setAnchorEl(null);
     event.preventDefault();
     setLoggedUser(null);
-    localStorage.removeItem("access");
-    localStorage.removeItem("refresh");
+    localStorage.clear();
     navigate("/");
   };
 
@@ -131,7 +134,7 @@ export default function KiddieAppBar() {
     >
       {loggedUser != null ? (
         <div>
-          <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+          <MenuItem onClick={handleProfilePage}>My account</MenuItem>
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </div>
       ) : (
@@ -140,9 +143,6 @@ export default function KiddieAppBar() {
           <MenuItem onClick={handleSignUp}>Sign Up</MenuItem>
         </div>
       )}
-      {/* <MenuItem onClick={handleLogin}>Login</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem onClick={handleSignUp}>Sign Up</MenuItem> */}
     </Menu>
   );
 
@@ -171,7 +171,8 @@ export default function KiddieAppBar() {
           aria-haspopup="true"
           color="inherit"
         >
-          <AccountCircle />
+          {/* <AccountCircle /> */}
+          <CheckroomIcon />
         </IconButton>
         <p>Profile</p>
       </MenuItem>
@@ -180,7 +181,7 @@ export default function KiddieAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" sx={{ borderRadius: 10 }}>
         <Toolbar>
           <IconButton
             size="large"
@@ -222,11 +223,12 @@ export default function KiddieAppBar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle />
+              {/* <AccountCircle /> */}
+              <CheckroomIcon fontSize="medium" />
               {loggedUser != null ? (
                 <Typography variant="body2">{loggedUser}</Typography>
               ) : (
-                <Typography variant="body2">Login/SignUp</Typography>
+                <Typography variant="body2"> Login / SignUp </Typography>
               )}
             </IconButton>
           </Box>

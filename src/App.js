@@ -13,6 +13,9 @@ import ItemsByCategory from "./components/ItemsByCategory/ItemsByCategory";
 import AllItems3 from "./components/AllItems/AllItems3";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AddItem from "./components/AddItem/AddItem";
+import ProfilePage from "./components/ProfilePage/ProfilePage";
+import ThankForShare from "./components/ThankForShare/ThankForShare";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 function App() {
   const [loggedUser, setLoggedUser] = useState(null);
@@ -29,26 +32,31 @@ function App() {
   });
 
   return (
-    <UserContext.Provider value={{ loggedUser, setLoggedUser }}>
-      <ThemeProvider theme={theme}>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            {/* <Route index element={<Ad />} /> */}
-            <Route index element={<HomePage />} />
-            <Route path="signup" element={<SignUp />} />
-            <Route path="login" element={<LoginPage />} />
-            <Route path="/items/:item_id" element={<ItemPageNew />} />
-            <Route
-              path="/items/categories/:category_id"
-              element={<ItemsByCategory />}
-            />
-            <Route path="test" element={<ItemPage />} />
-            <Route path="testapi" element={<AddItem />} />
-            <Route path="items" element={<AllItems3 />} />
-          </Route>
-        </Routes>
-      </ThemeProvider>
-    </UserContext.Provider>
+    <GoogleOAuthProvider clientId="777826670126-d4jtjnif246030bhcuouh35ptrphtcik.apps.googleusercontent.com">
+      <UserContext.Provider value={{ loggedUser, setLoggedUser }}>
+        <ThemeProvider theme={theme}>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              {/* <Route index element={<Ad />} /> */}
+              <Route index element={<HomePage />} />
+              <Route path="signup" element={<SignUp />} />
+              <Route path="login" element={<LoginPage />} />
+              <Route path="me" element={<ProfilePage />} />
+              <Route path="/items/:item_id" element={<ItemPageNew />} />
+              <Route path="shareitem" element={<AddItem />} />
+              <Route path="thankforshare" element={<ThankForShare />} />
+              <Route
+                path="/items/categories/:category_id"
+                element={<ItemsByCategory />}
+              />
+              <Route path="test" element={<ItemPage />} />
+              {/* <Route path="testapi" element={<AddItem />} /> */}
+              <Route path="items" element={<AllItems3 />} />
+            </Route>
+          </Routes>
+        </ThemeProvider>
+      </UserContext.Provider>
+    </GoogleOAuthProvider>
   );
 }
 

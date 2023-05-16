@@ -134,6 +134,8 @@ export default function SignUp() {
       className={classes.root}
       sx={{ marginTop: { xs: "15px", md: "30px" } }}
     >
+      {" "}
+      <h3>Sign up now and Join our community!</h3>
       <Box
         className={classes.form}
         sx={{
@@ -225,19 +227,6 @@ export default function SignUp() {
           }
         />
 
-        {/* <TextField
-            id="outlined-number"
-            label="Number of items"
-            type="number"
-            placeholder="Number of items"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            InputProps={{
-              inputProps: { min: 0, max: 30 },
-            }}
-          /> */}
-
         <TextField
           id="outlined-select"
           required
@@ -283,7 +272,7 @@ export default function SignUp() {
           variant="contained"
           type="submit"
           style={{ backgroundColor: "#e4c4a1" }}
-          sx={{ height: "40px", width: "120px" }}
+          sx={{ height: "40px", width: "120px", borderRadius: "12px" }}
           onClick={handleSubmit}
         >
           Submit
